@@ -6,7 +6,7 @@ import ru.faimon.instazoo.payload.request.SignUpRequest;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-public class PasswordMathesValidator implements ConstraintValidator<PasswordMatches, Object> {
+public class PasswordMatchesValidator implements ConstraintValidator<PasswordMatches, Object> {
     @Override
     public void initialize(PasswordMatches constraintAnnotation) {
 
