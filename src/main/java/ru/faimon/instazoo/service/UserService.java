@@ -11,7 +11,6 @@ import ru.faimon.instazoo.entity.enums.ERole;
 import ru.faimon.instazoo.exceptions.UserExistException;
 import ru.faimon.instazoo.payload.request.SignUpRequest;
 import ru.faimon.instazoo.repository.UserRepository;
-import ru.faimon.instazoo.security.JWTTokenProvider;
 
 import java.security.Principal;
 
@@ -60,5 +59,10 @@ public class UserService {
         String username = principal.getName();
         return userRepository.findUserByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Username not found with username: " + username));
+    }
+
+    public User getUserById(Long userId) {
+        return userRepository.findUserById(userId)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found with userId: " + userId));
     }
 }
