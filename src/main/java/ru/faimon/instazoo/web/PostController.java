@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin
-@RequestMapping("api/post")
+@RequestMapping("/api/posts")
 public class PostController {
 
     @Autowired
@@ -30,7 +30,7 @@ public class PostController {
     @Autowired
     private ResponseErrorValidation responseErrorValidation;
 
-    @PostMapping("/create")
+    @PostMapping("/")
     public ResponseEntity<Object> createPost(@Valid @RequestBody PostDTO postDTO, BindingResult bindingResult,
                                              Principal principal) {
         ResponseEntity<Object> errors = responseErrorValidation.mapValidationService(bindingResult);
@@ -40,7 +40,7 @@ public class PostController {
         return new ResponseEntity<>(createdPost, HttpStatus.OK);
     }
 
-    @GetMapping("/all")
+    @GetMapping("/")
     public ResponseEntity<List<PostDTO>> getAllPosts() {
         List<PostDTO> postDTOList = postService.getAllPosts()
                 .stream()
@@ -49,7 +49,7 @@ public class PostController {
         return new ResponseEntity<>(postDTOList, HttpStatus.OK);
     }
 
-    @GetMapping("/user/posts")
+    @GetMapping("/user")
     public ResponseEntity<List<PostDTO>> getAllPostsByUser(Principal principal) {
         List<PostDTO> postDTOList = postService.getAllPostsByUser(principal)
                 .stream()
@@ -66,7 +66,7 @@ public class PostController {
         return new ResponseEntity<>(postDTO, HttpStatus.OK);
     }
 
-    @DeleteMapping("/{postId}/delete")
+    @DeleteMapping("/{postId}")
     public ResponseEntity<MessageResponse> deletePost(@PathVariable("postId") String PostId, Principal principal) {
         postService.deletePost(Long.parseLong(PostId), principal);
         return new ResponseEntity<>(new MessageResponse("Post was deleted"), HttpStatus.OK);

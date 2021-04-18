@@ -1,5 +1,7 @@
 package ru.faimon.instazoo.web;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,9 +18,10 @@ import javax.validation.Valid;
 import java.security.Principal;
 
 @RestController
-@RequestMapping("api/user")
+@RequestMapping("/api/users")
 @CrossOrigin
 public class UserController {
+    public static final Logger LOG = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
     private UserService userService;
@@ -41,7 +44,7 @@ public class UserController {
         return new ResponseEntity<>(userDTO, HttpStatus.OK);
     }
 
-    @PostMapping("/update")
+    @PutMapping("/update")
     public ResponseEntity<Object> updateUser(@Valid @RequestBody UserDTO userDTO, BindingResult bindingResult,
                                               Principal principal) {
         ResponseEntity<Object> errors = responseErrorValidation.mapValidationService(bindingResult);

@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin
-@RequestMapping("api/comment")
+@RequestMapping("/api/comments")
 public class CommentController {
 
     @Autowired
